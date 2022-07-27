@@ -1,12 +1,23 @@
 from flask import Flask, render_template
+from datetime import datetime
 
 app = Flask("hello")
 
-@app.route("/")             # Define como raiz o recurso da página, nosso primeiro endpoint.
-@app.route("/hello")        # Define hello como sinônimo do mesmo endpoint.
-def hello(): 
-    return "Hello World"    
+posts = [
+    {
+        "title": "O meu Primeiro Post",
+        "body": "Aqui é o texto do Post",
+        "author": "Feulo",
+        "created": datetime(2022,7,25)
+    },
+    {
+        "title": "O meu Segundo Post",
+        "body": "Aqui é o texto do Post",
+        "author": "Danilo",
+        "created": datetime(2022,7,26)
+    },
+]
 
-@app.route("/meucontato")    # Define nosso segundo endpoint, que vem abaixo do raiz.
-def meuContato():
-    return render_template('index.html')
+@app.route("/")
+def index():
+    return render_template("index.html", posts=posts)
