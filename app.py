@@ -15,25 +15,25 @@ app.config["SQLALCHEMY_TRACK_MODIFICATIONS"] = False
 
 db = SQLAlchemy(app)    ## Pluging para instanciar um banco de dados e relacionar à aplicação py flask
 
+class Post(db.Model):   ## Post herdará a classe Model instanciado no objeto db
+    __tablename__ = 'posts' ## Se não houver esta redefinição, é assumido o nome da classe como nome da tabela
+    id = db.Column(db.Integer, primary_key=True, autoincrement=True)
+    title = db.Column(db.String(70), nullable=False)
+    body = db.Column(db.String(500))
+    ## author = db.Column(db.String(20)) -- Referenciada via db.ForeignKey('users.id') na tabela User
+    created = db.Column(db.DateTime, nullable=False, default=datetime.now)
+    user_id = db.Column(db.Integer, db.ForeignKey('users.id'))
+
+""" Professor
 class Post(db.Model):
     __tablename__ = 'posts'
     id = db.Column(db.Integer, primary_key=True, autoincrement=True)
     title = db.Column(db.String(70), nullable=False)
     body = db.Column(db.String(500))
-    author = db.Column(db.String(20))
+    ## author = db.Column(db.String(20))
     created = db.Column(db.DateTime, nullable=False, default=datetime.now)
     user_id = db.Column(db.Integer, db.ForeignKey('users.id'))
-
-""" meu código com erro
-class Post(db.Model):   ## Post herdará a classe Model instanciado no objeto db
-    __tablename__ = 'posts' ## Se não houver esta redefinição, é assumido o nome da classe como nome da tabela
-    id = db.Column(db.Integer, primary_key=True, autoincrement=True)
-    title = dbColumn(db.String(70), nullable=False)
-    body = dbColumn(db.String(500))
-    author = dbColumn(db.String(20))
-    created = dbColumn(db.DateTime, nullable=False, default=datetime.now)
 """
-
 class User(db.Model):
     __tablename__ = "users"
     id = db.Column(db.Integer, primary_key=True, autoincrement=True)
