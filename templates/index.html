@@ -2,6 +2,11 @@
 
 {%block title %} Página Inicial {% endblock %}
 
+{% block header %}
+    <h1> Posts </h1>
+    <a class="action" hef="{{ url_for('create')}}"> New Post </a>
+{% endblock %}
+
 {% block content %}
 {% for post in posts %}
     <article class="post">
