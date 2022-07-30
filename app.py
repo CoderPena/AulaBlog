@@ -15,8 +15,10 @@ app = Flask("hello")
 ## Etc
 ## A 1a. '/' indica que o BD está LOCAL
 #app.config["SQLALCHEMY_DATABASE_URI"] = "sqlite:///app.db"
-db_url = os.environ.get(DATABASE_URL) or "sqlite:///app.db"
-app.config["SQLALCHEMY_DATABASE_URI"] = db_url.replace("postgres", "postgresql")
+db_url = os.environ.get("DATABASE_URL") or "sqlite:///app.db"
+app.config["SQLALCHEMY_DATABASE_URI"] =  db_url.replace("postgres", "postgresql")
+
+
 app.config["SQLALCHEMY_TRACK_MODIFICATIONS"] = False
 app.config["SECRET_KEY"] = "pudim" ## Chave para gerar o hash
 
